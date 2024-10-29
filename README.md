@@ -1,146 +1,58 @@
-# Toast UI Editor Component for Svelte
+# create-svelte
 
-0.0.1 BETA
+Everything you need to build a Svelte library, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
 
-This is not official wrapper for [Toast UI Editor](https://github.com/nhn/tui.editor).
-Inspired from [Toast UI Editor for Vue](https://github.com/nhn/tui.editor/tree/master/apps/vue-editor).
+Read more about creating a library [in the docs](https://svelte.dev/docs/kit/packaging).
 
-## Install
+## Creating a project
 
-`npm i -D tui-editor-svelte`
+If you're seeing this, you've probably already done this step. Congrats!
 
-`yarn add -D tui-editor-svelte`
+```bash
+# create a new project in the current directory
+npx sv create
 
-`pnpm i -D tui-editor-svelte`
-
-
-### for rollup CSR users
-
-set `output.inlineDynamicImports` to `true` for work perperly.
-The component is using dynamic `import` for both CSR and SSR compatible.
-
-```js
-{
-  // ...
-  "output": {
-    // ...
-    inlineDynamicImports: true
-  }
-  // ...
-}
+# create a new project in my-app
+npx sv create my-app
 ```
 
-### for `@sveltejs/kit` users
+## Developing
 
-add `tui-editor-svelte` in `kit.vite.optimizeDeps.include` array because `@toast-ui/editor` is a browser library.
+Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
-```js
-{
-	kit: {
-		// ...
-		vite: {
-			// ...
-      optimizeDeps: {
-        include: ['tui-editor-svelte']
-      }
-      // ...
-		}
-    // ...
-	}
-}
+```bash
+npm run dev
+
+# or start the server and open the app in a new browser tab
+npm run dev -- --open
 ```
 
-## Usage
+Everything inside `src/lib` is part of your library, everything inside `src/routes` can be used as a showcase or preview app.
 
-### Editor
-```svelte
-<scrip>
-import Editor from 'tui-editor-svelte/Editor.svelte';
-</script>
+## Building
 
-<Editor initialValue="Markdown **rocks!**" />
+To build your library:
+
+```bash
+npm run package
 ```
 
-### Viewer
+To create a production version of your showcase app:
 
-### Editor
-```svelte
-<scrip>
-import Viewer from 'tui-editor-svelte/Viewer.svelte';
-</script>
-
-<Viewer initialValue="Markdown **rocks!**" />
+```bash
+npm run build
 ```
 
-## Component properties
+You can preview the production build with `npm run preview`.
 
-### Editor
+> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
 
-See [Vue editor props](https://github.com/nhn/tui.editor/tree/master/apps/vue-editor#props).
+## Publishing
 
-### Viewer
+Go into the `package.json` and give your package the desired name through the `"name"` option. Also consider adding a `"license"` field and point it to a `LICENSE` file which you can create from a template (one popular option is the [MIT license](https://opensource.org/license/mit/)).
 
-See [Vue editor props](https://github.com/nhn/tui.editor/tree/master/apps/vue-editor#props-1).
+To publish your library to [npm](https://www.npmjs.com):
 
-## Compoenet methods
-
-Same as [Vue editor instance methods](https://github.com/nhn/tui.editor/tree/master/apps/vue-editor#instance-methods).
-but usage is not same as vue. use like this:
-
-```svelte
-<scrip>
-import Editor from 'tui-editor-svelte/Editor.svelte';
-let editor, html;
-</script>
-
-<Editor bind:this={editor} initialValue="Markdown **rocks!**" />
-
-<button on:click={() => html = editor.invoke('getHtml')}>Get html content</button>
-<pre>{html}</pre>
+```bash
+npm publish
 ```
-
-## Component events
-
-editor events are `load,focus,blur,change,stateChange`.
-
-See [Vue editor events](https://github.com/nhn/tui.editor/tree/master/apps/vue-editor#events) and use like below:
-
-```svelte
-<scrip>
-import Editor from 'tui-editor-svelte/Editor.svelte';
-</script>
-
-<Editor on:load={() => console.log('TUI Editor loaded.')} initialValue="Markdown **rocks!**" />
-
-```
-
-## Having issues? suggestions?
-
-Feel free and add an [issue](https://github.com/composite/tui-editor-svelte/issues).
-
-## Contribution for better component
-
-use `PNPM`.
-
-- Clone this repository.
-- `pnpm -r i`
-- `pnpm run csr:dev`
-- `pnpm run kit:dev`
-
-## TODO
-
-- [x] `<Editor/>`
-- [x] `<Viewer/>`
-- [x] Test
-- [x] Storybook
-- [x] Documentation
-- [x] publish to NPM
-- [x] rollup SPA
-- [ ] snowpack SPA
-- [ ] `sapper`
-- [x] `@svelte/kit`
-- [ ] Prepare for TUI Editor 3?
-
-## License
-
-MIT.
