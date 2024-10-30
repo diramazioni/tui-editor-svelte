@@ -1,14 +1,11 @@
 <script>
   import { run } from 'svelte/legacy';
-
-  import { onMount, onDestroy, createEventDispatcher } from 'svelte'
-  // import 'codemirror/lib/codemirror.css';
+  import { onMount, createEventDispatcher } from 'svelte';
   import '@toast-ui/editor/dist/toastui-editor.css';
   import { editorEvents, defaultValueMap } from './tui_defaults.js';
-
-	
-	
   
+  const dispatch = createEventDispatcher();
+
   /**
    * @typedef {Object} Props
    * @property {string} [height]
@@ -17,10 +14,17 @@
    */
 
   /** @type {Props} */
-  let { height = defaultValueMap.height, initialValue = defaultValueMap.initialValue, options = {} } = $props();
+  let { 
+    height = defaultValueMap.height, 
+    initialValue = defaultValueMap.initialValue, 
+    options = {}, 
+    onload = () => {},
+ 
+  } = $props();
 
-  let editor = $state(), node = $state(), _height = $state(height);
-  const emit = createEventDispatcher();
+  let editor = $state();
+  let node = $state();
+  let _height = $state(height);
 
   /**
    * @returns {Node}
@@ -32,29 +36,45 @@
   run(() => {
     if(height !== _height) {
       editor.height(height);
-      _height = height
+      _height = height;
     }
   });
 
-  async function init(node, options) {
+  async function initViewer() {
+    if (!node) return;
+
     const Viewer = (await import('@toast-ui/editor/dist/toastui-editor-viewer')).default;
-    options = { ...options, height, initialValue };
+    const viewerOptions = { 
+      ...options, 
+      height, 
+      initialValue 
+    };
+
     Object.keys(defaultValueMap).forEach(key => {
-      if (!options[key]) {
-        options[key] = defaultValueMap[key];
+      if (!viewerOptions[key]) {
+        viewerOptions[key] = defaultValueMap[key];
       }
     });
-    options.events = editorEvents.reduce((events, event) => (events[event] = (...args) => emit(event, args), events), {});
-    options.el = node;
-    editor = new Viewer(options);
 
-    return {
-      destroy() {
-        editorEvents.forEach(event => editor.off(event));
+    // Map events to callback props
+    viewerOptions.events = {
+      load: (...args) => onload(...args)
+    };
+
+    viewerOptions.el = node;
+    editor = new Viewer(viewerOptions);
+  }
+
+  onMount(async () => {
+    await initViewer();
+
+    return () => {
+      if (editor) {
+        //editorEvents.forEach(event => editor.off(event));
         editor.remove();
       }
-    }
-
-  }
+    };
+  });
 </script>
-<div bind:this={node} use:init={options}></div>
+
+<div bind:this={node}></div>

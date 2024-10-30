@@ -1,12 +1,8 @@
 <script>
   import { run } from 'svelte/legacy';
-
-  //import 'codemirror/lib/codemirror.css';
+  import { onMount } from 'svelte';
   import '@toast-ui/editor/dist/toastui-editor.css';
-  import { editorEvents, defaultValueMap } from './tui_defaults.js';
-	import { createEventDispatcher } from 'svelte';
-	const dispatch = createEventDispatcher();
-	
+  import { defaultValueMap } from './tui_defaults.js';
   
   /**
    * @typedef {Object} Props
@@ -24,10 +20,10 @@
     initialEditType = defaultValueMap.initialEditType,
     initialValue = defaultValueMap.initialValue,
     options = {},
-    load = false,
-    change = false,
-    focus = false,
-    blur = false,
+    onload = () => {},
+    onchange = () => {},
+    onfocus = () => {},
+    onblur = () => {},
   } = $props();
   /**
    *
@@ -49,7 +45,10 @@
     return node;
   }
 
-  let editor = $state(), node = $state(), _previewStyle = $state(previewStyle), _height = $state(height);
+  let editor = $state();
+  let node = $state();
+  let _previewStyle = $state(previewStyle);
+  let _height = $state(height);
 
   run(() => {
     if(previewStyle !== _previewStyle) {
@@ -62,30 +61,46 @@
     }
   });
 
-  async function init(node, options) {
+  async function initEditor() {
+    if (!node) return;
+    
     const Editor = (await import('@toast-ui/editor')).default;
-    options = { ...options, previewStyle, height, initialEditType, initialValue };
+    const editorOptions = { 
+      ...options, 
+      previewStyle, 
+      height, 
+      initialEditType, 
+      initialValue 
+    };
+
     Object.keys(defaultValueMap).forEach(key => {
-      if (!options[key]) {
-        options[key] = defaultValueMap[key];
+      if (!editorOptions[key]) {
+        editorOptions[key] = defaultValueMap[key];
       }
     });
-    // const editorEvents = ['load', 'change', 'stateChange', 'focus', 'blur'];
-    options.events = Object.fromEntries(
-    editorEvents.map(event => [
-        event,
-        (...args) => dispatch(event, args)
-      ])
-    );
-    options.el = node;
-    editor = new Editor(options);
+
+    // Map events to callback props
+    editorOptions.events = {
+      load: (...args) => onload(...args),
+      change: (...args) => onchange(...args),
+      focus: (...args) => onfocus(...args),
+      blur: (...args) => onblur(...args)
+    };
+
+    editorOptions.el = node;
+    editor = new Editor(editorOptions);
   }
 
-  $effect(() => {  
+  onMount(async () => {
+    await initEditor();
+
     return () => {
-      editorEvents.forEach(event => editor.off(event));
-      editor.remove();
-    }
-  })
+      if (editor) {
+        //editorEvents.forEach(event => editor.off(event));
+        editor.remove();
+      }
+    };
+  });
 </script>
-<div bind:this={node} use:init={options}></div>
+
+<div bind:this={node}></div>

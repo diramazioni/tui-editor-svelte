@@ -1,21 +1,32 @@
 <script lang="ts" setup>
     import Editor from "$lib/Editor.svelte";
+    import Viewer from "$lib/Viewer.svelte";
     import { content } from './dummy.js';
+    let viewer = false
 </script>
 
 <main>
 
 </main>
 
-<Editor initialValue={content} 
-load={() => console.log('Editor loaded')}
-change={() => console.log('Editor changed')}
-focus={() => console.log('Editor focused')}
-/>
+<h1>Welcome to tui-editor-svelte for Svelte 5!</h1>
+<p><button on:click={() => viewer = !viewer}>{viewer ? 'Editor mode' : 'Viewer mode'}</button></p>
 
-<h1>Welcome to your library project</h1>
-<p>Create your package using @sveltejs/package and preview/showcase your work with SvelteKit</p>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+{#if viewer}
+    <Viewer initialValue={content} 
+    onload={() => console.log('Viewer loaded')}
+    onchange={() => console.log('Viewer changed')}
+    onfocus={() => console.log('Viewer focused')}
+    onblur={() => console.log('Viewer blur')}
+    />    
+{:else}
+    <Editor initialValue={content} 
+    onload={() => console.log('Editor loaded')}
+    onchange={() => console.log('Editor changed')}
+    onfocus={() => console.log('Editor focused')}
+    onblur={() => console.log('Editor blur')}
+    />
+{/if}
 
 
 <style>
