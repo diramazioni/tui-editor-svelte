@@ -11,19 +11,9 @@
     const editorInstance = editorRef.getEditor();
     // editorInstance.changePreviewStyle('tab');
     editorInstance.exec('bold');
-    editorInstance.exec('link', 'example test', "http://example.com");
-    //editorInstance.insertText('[example test]("http://example.com")')
+    editorInstance.insertText('[example test]("http://example.com")')
   }
-  // onMount(async () => {
-  //   //const Editor = (await import('@toast-ui/editor')).default;
-  //   editorRef.plugins
-  // });
-  
-  $effect(() => {
-    // This doesn't find the fucntion
-    //editorRef.invoke("changePreviewStyle", "tab");
-    
-  });
+
 </script>
 
 <main></main>

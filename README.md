@@ -1,22 +1,79 @@
-# create-svelte
+# tui-editor-svelte for Svelte 5!
 
-Everything you need to build a Svelte library, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+This libraray is a wrapper for [tui-editor](https://github.com/nhn/tui.editor) for Svelte 5.
 
-Read more about creating a library [in the docs](https://svelte.dev/docs/kit/packaging).
+## Installation
 
-## Creating a project
+`npm install @diramazioni/tui-editor-svelte`
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Usage
+Example `+page.svelte`:
+'''svelte
+<script lang="ts" setup>
+  import Editor from "$lib/Editor.svelte";
+  import Viewer from "$lib/Viewer.svelte";
+  import { content } from "./dummy.js";
+  
 
-```bash
-# create a new project in the current directory
-npx sv create
+  let viewerMode = $state(false);
+  let editorRef = $state(); // Reference to store the component instance
 
-# create a new project in my-app
-npx sv create my-app
-```
+  function invokeTest() {
+    const editorInstance = editorRef.getEditor();
+    // editorInstance.changePreviewStyle('tab');
+    editorInstance.exec('bold');
+    editorInstance.insertText('[example test]("http://example.com")')
+  }
 
-## Developing
+</script>
+
+<main></main>
+
+<h1>Welcome to tui-editor-svelte for Svelte 5!</h1>
+<p>
+  <button onclick={() => (viewerMode = !viewerMode)}>
+    {viewerMode ? "Editor mode" : "Viewer mode"}
+  </button>
+</p>
+
+{#if viewerMode}
+  <Viewer initialValue={content} onload={() => console.log("Viewer loaded")} />
+{:else}
+  <Editor
+    bind:this={editorRef}
+    initialValue={content}
+    onload={() => console.log("Editor loaded")}
+  />
+  <!-- onchange={() => console.log('Editor changed')}
+    onfocus={() => console.log('Editor focused')}
+    onblur={() => console.log('Editor blur')} -->
+{/if}
+<button onclick={invokeTest}>Invoke Method</button>
+
+<style>
+  main {
+    text-align: center;
+    padding: 1em;
+    max-width: 240px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    color: #ff3e00;
+    text-transform: uppercase;
+    font-size: 4em;
+    font-weight: 100;
+  }
+
+  @media (min-width: 640px) {
+    main {
+      max-width: none;
+    }
+  }
+</style>
+'''
+
+## Developing this library
 
 Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
