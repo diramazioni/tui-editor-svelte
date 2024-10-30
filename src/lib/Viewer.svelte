@@ -2,18 +2,8 @@
   import { run } from 'svelte/legacy';
   import { onMount, createEventDispatcher } from 'svelte';
   import '@toast-ui/editor/dist/toastui-editor.css';
-  import { editorEvents, defaultValueMap } from './tui_defaults.js';
+  import { defaultValueMap } from './tui_defaults.js';
   
-  const dispatch = createEventDispatcher();
-
-  /**
-   * @typedef {Object} Props
-   * @property {string} [height]
-   * @property {string} [initialValue]
-   * @property {object} [options]
-   */
-
-  /** @type {Props} */
   let { 
     height = defaultValueMap.height, 
     initialValue = defaultValueMap.initialValue, 
@@ -32,7 +22,9 @@
   export function getRootElement() {
     return node;
   }
-
+  export function getEditor() {
+    return editor;
+  }
   run(() => {
     if(height !== _height) {
       editor.height(height);
@@ -41,20 +33,9 @@
   });
 
   async function initViewer() {
-    if (!node) return;
 
     const Viewer = (await import('@toast-ui/editor/dist/toastui-editor-viewer')).default;
-    const viewerOptions = { 
-      ...options, 
-      height, 
-      initialValue 
-    };
-
-    Object.keys(defaultValueMap).forEach(key => {
-      if (!viewerOptions[key]) {
-        viewerOptions[key] = defaultValueMap[key];
-      }
-    });
+    const viewerOptions = { ...defaultValueMap, ...options, initialValue };
 
     // Map events to callback props
     viewerOptions.events = {

@@ -1,52 +1,72 @@
 <script lang="ts" setup>
-    import Editor from "$lib/Editor.svelte";
-    import Viewer from "$lib/Viewer.svelte";
-    import { content } from './dummy.js';
-    let viewer = false
+  import Editor from "$lib/Editor.svelte";
+  import Viewer from "$lib/Viewer.svelte";
+  import { content } from "./dummy.js";
+  
+
+  let viewerMode = $state(false);
+  let editorRef = $state(); // Reference to store the component instance
+
+  function invokeTest() {
+    const editorInstance = editorRef.getEditor();
+    // editorInstance.changePreviewStyle('tab');
+    editorInstance.exec('bold');
+    editorInstance.exec('link', 'example test', "http://example.com");
+    //editorInstance.insertText('[example test]("http://example.com")')
+  }
+  // onMount(async () => {
+  //   //const Editor = (await import('@toast-ui/editor')).default;
+  //   editorRef.plugins
+  // });
+  
+  $effect(() => {
+    // This doesn't find the fucntion
+    //editorRef.invoke("changePreviewStyle", "tab");
+    
+  });
 </script>
 
-<main>
-
-</main>
+<main></main>
 
 <h1>Welcome to tui-editor-svelte for Svelte 5!</h1>
-<p><button on:click={() => viewer = !viewer}>{viewer ? 'Editor mode' : 'Viewer mode'}</button></p>
+<p>
+  <button onclick={() => (viewerMode = !viewerMode)}>
+    {viewerMode ? "Editor mode" : "Viewer mode"}
+  </button>
+</p>
 
-{#if viewer}
-    <Viewer initialValue={content} 
-    onload={() => console.log('Viewer loaded')}
-    onchange={() => console.log('Viewer changed')}
-    onfocus={() => console.log('Viewer focused')}
-    onblur={() => console.log('Viewer blur')}
-    />    
+{#if viewerMode}
+  <Viewer initialValue={content} onload={() => console.log("Viewer loaded")} />
 {:else}
-    <Editor initialValue={content} 
-    onload={() => console.log('Editor loaded')}
-    onchange={() => console.log('Editor changed')}
+  <Editor
+    bind:this={editorRef}
+    initialValue={content}
+    onload={() => console.log("Editor loaded")}
+  />
+  <!-- onchange={() => console.log('Editor changed')}
     onfocus={() => console.log('Editor focused')}
-    onblur={() => console.log('Editor blur')}
-    />
+    onblur={() => console.log('Editor blur')} -->
 {/if}
-
+<button onclick={invokeTest}>Invoke Method</button>
 
 <style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
-	}
+  main {
+    text-align: center;
+    padding: 1em;
+    max-width: 240px;
+    margin: 0 auto;
+  }
 
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
+  h1 {
+    color: #ff3e00;
+    text-transform: uppercase;
+    font-size: 4em;
+    font-weight: 100;
+  }
 
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
+  @media (min-width: 640px) {
+    main {
+      max-width: none;
+    }
+  }
 </style>

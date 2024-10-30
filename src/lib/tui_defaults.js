@@ -1,7 +1,5 @@
-
-export const editorEvents = ['load', 'change', 'focus', 'blur'];
 export const defaultValueMap = {
-  initialEditType: 'markdown',
+  initialEditType: 'wysiwyg', // 'markdown',
   initialValue: '',
   height: '300px',
   previewStyle: 'vertical'

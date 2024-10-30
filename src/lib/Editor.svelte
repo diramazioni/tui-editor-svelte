@@ -1,92 +1,67 @@
-<script>
+<script lang="ts">
   import { run } from 'svelte/legacy';
   import { onMount } from 'svelte';
+  import type { Editor as ToastEditor, EditorOptions } from '@toast-ui/editor';
   import '@toast-ui/editor/dist/toastui-editor.css';
   import { defaultValueMap } from './tui_defaults.js';
-  
-  /**
-   * @typedef {Object} Props
-   * @property {string} [previewStyle]
-   * @property {string} [height]
-   * @property {string} [initialEditType]
-   * @property {string} [initialValue]
-   * @property {object} [options]
-   */
 
-  /** @type {Props} */
+  interface EditorProps {
+    initialValue?: string;
+    options?: Partial<EditorOptions>;
+    onload?: (e: any) => void;
+    onchange?: (e: any) => void;
+    onfocus?: (e: any) => void;
+    onblur?: (e: any) => void;
+  }
+
   let {
-    previewStyle = defaultValueMap.previewStyle,
-    height = defaultValueMap.height,
-    initialEditType = defaultValueMap.initialEditType,
     initialValue = defaultValueMap.initialValue,
     options = {},
     onload = () => {},
     onchange = () => {},
     onfocus = () => {},
     onblur = () => {},
-  } = $props();
-  /**
-   *
-   * @param method {string}
-   * @param args {any}
-   * @returns {any}
-   */
-  export function invoke(method, ...args) {
+  }: EditorProps = $props() as EditorProps;
+  
+  let editor: ToastEditor | null  = $state();
+  let node: HTMLElement | null  = $state();
+
+  export function invoke(method: string, ...args: any[]): any {
+    console.log('invoke', method, args);
       let result = null;
       if (editor[method]) {
         result = editor[method](...args);
+        return result;
+      } else {
+        console.error(`Method ${method} does not exist on the editor instance.`);
       }
-      return result;
+      return null;
   }
-  /**
-   * @returns {Node}
-   */
+
   export function getRootElement() {
     return node;
   }
+  export function getEditor() {
+    return editor;
+  }
 
-  let editor = $state();
-  let node = $state();
-  let _previewStyle = $state(previewStyle);
-  let _height = $state(height);
+  async function initEditor(): Promise<void> {
+    const editorModule = await import('@toast-ui/editor');
+    const Editor = editorModule.default;
+    // const { tableMergedCell } = Editor.plugin;
+    // Cannot destructure property 'tableMergedCell' of 'Editor.plugin' as it is undefined.
 
-  run(() => {
-    if(previewStyle !== _previewStyle) {
-      editor.changePreviewStyle(previewStyle);
-      _previewStyle = previewStyle
-    }
-    if(height !== _height) {
-      editor.height(height);
-      _height = height
-    }
-  });
-
-  async function initEditor() {
-    if (!node) return;
-    
-    const Editor = (await import('@toast-ui/editor')).default;
-    const editorOptions = { 
-      ...options, 
-      previewStyle, 
-      height, 
-      initialEditType, 
-      initialValue 
-    };
-
-    Object.keys(defaultValueMap).forEach(key => {
-      if (!editorOptions[key]) {
-        editorOptions[key] = defaultValueMap[key];
-      }
-    });
-
+    //const plugins = [tableMergedCell];
+    // Merge default options with user options
+    const editorOptions = { ...defaultValueMap, ...options, initialValue }; // plugins,
     // Map events to callback props
     editorOptions.events = {
-      load: (...args) => onload(...args),
-      change: (...args) => onchange(...args),
-      focus: (...args) => onfocus(...args),
-      blur: (...args) => onblur(...args)
+      load: (args: any) => onload(args),
+      change: (args: any) => onchange(args),
+      focus: (args: any) => onfocus(args),
+      blur: (args: any) => onblur(args)
     };
-
+    // Inject the editor into the DOM
     editorOptions.el = node;
     editor = new Editor(editorOptions);
   }
@@ -96,7 +71,8 @@
 
     return () => {
       if (editor) {
-        //editorEvents.forEach(event => editor.off(event));
+        const editorEvents = ['load', 'change', 'focus', 'blur'];
+        editorEvents.forEach(event => editor.off(event));
         editor.remove();
       }
     };
