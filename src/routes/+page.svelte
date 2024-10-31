@@ -16,7 +16,7 @@
 
 </script>
 
-<main></main>
+<main>
 
 <h1>Welcome to tui-editor-svelte for Svelte 5!</h1>
 <p>
@@ -38,25 +38,17 @@
     onblur={() => console.log('Editor blur')} -->
 {/if}
 <button onclick={invokeTest}>Invoke Method</button>
+</main>
 
 <style>
-  main {
-    text-align: center;
-    padding: 1em;
-    max-width: 240px;
-    margin: 0 auto;
-  }
-
+  
   h1 {
+    margin: 0 auto;
+    text-align: center;
     color: #ff3e00;
     text-transform: uppercase;
     font-size: 4em;
     font-weight: 100;
   }
 
-  @media (min-width: 640px) {
-    main {
-      max-width: none;
-    }
-  }
 </style>
