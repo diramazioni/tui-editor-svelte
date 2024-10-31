@@ -1,4 +1,5 @@
 {
+	"version": "0.1.0",
 	"name": "@diramazioni/tui-editor-svelte",
 	"description": "A Svelte wrapper for the TUI Editor",
 	"keywords": [
@@ -17,7 +18,6 @@
 		"url": "https://github.com/diramazioni/tui-editor-svelte/issues"
 	},
 	"homepage": "https://github.com/diramazioni/tui-editor-svelte#readme",
-	"version": "0.0.1",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run package",

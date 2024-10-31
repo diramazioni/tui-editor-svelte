@@ -39,6 +39,21 @@ Example `+page.svelte`:
 </main>
 ```
 
+## Plugins
+
+All the plugins from [tui-editor](https://github.com/nhn/tui.editor) are supported, to use them you need to specify an array of the plugin you want to use on the pluginsOn prop. 
+```svelte
+  <Viewer 
+    initialValue={content} 
+    pluginsOn={['tableMergedCell','codeSyntaxHighlight','chart', 'uml']} 
+    />
+  <Editor
+    bind:this={editorRef}
+    initialValue={content}
+    pluginsOn={['colorSyntax', 'tableMergedCell','codeSyntaxHighlight', 'chart', 'uml']} />
+```
+---
+
 ## Developing this library
 
 Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:

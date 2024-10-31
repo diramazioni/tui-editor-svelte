@@ -15,7 +15,7 @@
   // chart
   import '@toast-ui/chart/dist/toastui-chart.css';
 
-  import { defaultValueMap } from './tui_defaults.js';
+  import { defaultTuiOptions } from './tui_defaults.js';
   import { defaultChartOptions } from './chart_defaults.js';
 
   interface EditorProps {
@@ -38,7 +38,7 @@
   }
 
   let {
-    initialValue = defaultValueMap.initialValue,
+    initialValue = defaultTuiOptions.initialValue,
     options = {},
     pluginsOn = [],
     chartOptions = {},
@@ -101,7 +101,7 @@
       plugins.push(uml);
     }
     // Merge default options with user options
-    const editorOptions = { ...defaultValueMap, ...options, plugins, initialValue }; 
+    const editorOptions = { ...defaultTuiOptions, ...options, plugins, initialValue }; 
     console.log('editorOptions', editorOptions);
     // Map events to callback props
     editorOptions.events = {

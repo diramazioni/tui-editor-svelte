@@ -1,4 +1,4 @@
-export const defaultValueMap = {
+export const defaultTuiOptions = {
   initialEditType: 'wysiwyg', // 'markdown',
   initialValue: '',
   height: 'auto',

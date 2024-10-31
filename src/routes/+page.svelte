@@ -26,7 +26,11 @@
 </p>
 
 {#if viewerMode}
-  <Viewer initialValue={content} onload={() => console.log("Viewer loaded")} />
+  <Viewer 
+    initialValue={content} 
+    pluginsOn={['tableMergedCell','codeSyntaxHighlight','chart', 'uml']} 
+    onload={() => console.log("Viewer loaded")} 
+    />
 {:else}
   <Editor
     bind:this={editorRef}
