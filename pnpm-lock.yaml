@@ -7,6 +7,31 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@toast-ui/chart':
+        specifier: ^4.6.1
+        version: 4.6.1
+      '@toast-ui/editor-plugin-chart':
+        specifier: ^3.0.1
+        version: 3.0.1
+      '@toast-ui/editor-plugin-code-syntax-highlight':
+        specifier: ^3.1.0
+        version: 3.1.0
+      '@toast-ui/editor-plugin-color-syntax':
+        specifier: ^3.1.0
+        version: 3.1.0
+      '@toast-ui/editor-plugin-table-merged-cell':
+        specifier: ^3.1.0
+        version: 3.1.0
+      '@toast-ui/editor-plugin-uml':
+        specifier: ^3.0.1
+        version: 3.0.1
+      prismjs:
+        specifier: ^1.29.0
+        version: 1.29.0
+      tui-color-picker:
+        specifier: ^2.2.8
+        version: 2.2.8
     devDependencies:
       '@sveltejs/adapter-auto':
         specifier: ^3.0.0
@@ -330,6 +355,24 @@ packages:
       svelte: ^5.0.0-next.96 || ^5.0.0
       vite: ^5.0.0
 
+  '@toast-ui/chart@4.6.1':
+    resolution: {integrity: sha512-F35IkHS0U9zqN6xIV1Yj3/wh8KGlZyzT3bwVGBJh/82DMDMn8rD2Us8X7xBMBGcZ3E15qkfnKjrATxU5ZoGAnA==}
+
+  '@toast-ui/editor-plugin-chart@3.0.1':
+    resolution: {integrity: sha512-mdqJerDo836kxKZEa3B6NZOJLrb+acRMkPIanYo//9GFPJcllG7KFdZU+K0bSMapEED7W7OJCsOzM0VNThndHg==}
+
+  '@toast-ui/editor-plugin-code-syntax-highlight@3.1.0':
+    resolution: {integrity: sha512-OgX5pZiTnHREoTTXDAFu1k6RzEspGOxeJNRlt/Lnoi1GvLbIpUTTbBcls9becpXT/Qdls++8G3r5C60cVdellA==}
+
+  '@toast-ui/editor-plugin-color-syntax@3.1.0':
+    resolution: {integrity: sha512-UVKfMBPV+3snSaJn9RUKGbxJbgi92D2t68ow8wAjGezvMp1ht4UVETrvomdTGr+RYhXSeH3JvSwN9nmQqw0qzA==}
+
+  '@toast-ui/editor-plugin-table-merged-cell@3.1.0':
+    resolution: {integrity: sha512-9ch9h1heTs0Kkmhwpb1ef9psQSM77wvUO3J75BsHv3RO5nAug42W3HC4Y+qbX5n1z1VhOGGjuOb4GPIr8s5dRA==}
+
+  '@toast-ui/editor-plugin-uml@3.0.1':
+    resolution: {integrity: sha512-KKvTB++lJkogOSBgtgJqli5nW76/fgxh0CvsHqKh5WQu2r6O+BTGPBG6oRy9PBfJvwN1g8YZ4ZLQGXSXDrtm1w==}
+
   '@toast-ui/editor@3.2.2':
     resolution: {integrity: sha512-ASX7LFjN2ZYQJrwmkUajPs7DRr9FsM1+RQ82CfTO0Y5ZXorBk1VZS4C2Dpxinx9kl55V4F8/A2h2QF4QMDtRbA==}
 
@@ -509,9 +552,16 @@ packages:
   picocolors@1.1.1:
     resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
 
+  plantuml-encoder@1.4.0:
+    resolution: {integrity: sha512-sxMwpDw/ySY1WB2CE3+IdMuEcWibJ72DDOsXLkSmEaSzwEUaYBT6DWgOfBiHGCux4q433X6+OEFWjlVqp7gL6g==}
+
   postcss@8.4.47:
     resolution: {integrity: sha512-56rxCq7G/XfB4EkXq9Egn5GCqugWvDFjafDOThIdMBsI15iqPqR5r15TfSr1YPYeEI19YeaXMCbY6u88Y76GLQ==}
     engines: {node: ^10 || ^12 || >=14}
+
+  prismjs@1.29.0:
+    resolution: {integrity: sha512-Kx/1w86q/epKcmte75LNrEoT+lX8pBpavuAbvJWRXar7Hz8jrtF+e3vY751p0R8H9HdArwaCTNDDzHg/ScJK1Q==}
+    engines: {node: '>=6'}
 
   prosemirror-commands@1.6.2:
     resolution: {integrity: sha512-0nDHH++qcf/BuPLYvmqZTUUsPJUCPBUXt0J1ErTcDIS369CTp773itzLGIgIXG4LJXOlwYCr44+Mh4ii6MP1QA==}
@@ -601,6 +651,9 @@ packages:
 
   tslib@2.8.0:
     resolution: {integrity: sha512-jWVzBLplnCmoaTr13V9dYbiQ99wvZRd0vNWaDRg+aVYRcjDF3nDksxFDE/+fkXnKhpnUUkmx5pK/v8mCtLVqZA==}
+
+  tui-color-picker@2.2.8:
+    resolution: {integrity: sha512-q5sE9NQ5NR9lYpilYjcI7Sdv0KCogo+W8fZY+AYTj/HYg+9fscYy3UuJ6UQiV1bF+ARCLwFRWC8UcOt9kuUctQ==}
 
   typescript@5.6.3:
     resolution: {integrity: sha512-hjcS1mhfuyi4WW8IWtjP7brDrG2cuDZukyrYrSauoXGNgx0S7zceP07adYkJycEr56BOUTNPzbInooiN3fn1qw==}
@@ -860,6 +913,26 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@toast-ui/chart@4.6.1': {}
+
+  '@toast-ui/editor-plugin-chart@3.0.1':
+    dependencies:
+      '@toast-ui/chart': 4.6.1
+
+  '@toast-ui/editor-plugin-code-syntax-highlight@3.1.0':
+    dependencies:
+      prismjs: 1.29.0
+
+  '@toast-ui/editor-plugin-color-syntax@3.1.0':
+    dependencies:
+      tui-color-picker: 2.2.8
+
+  '@toast-ui/editor-plugin-table-merged-cell@3.1.0': {}
+
+  '@toast-ui/editor-plugin-uml@3.0.1':
+    dependencies:
+      plantuml-encoder: 1.4.0
+
   '@toast-ui/editor@3.2.2':
     dependencies:
       dompurify: 2.5.7
@@ -1033,11 +1106,15 @@ snapshots:
 
   picocolors@1.1.1: {}
 
+  plantuml-encoder@1.4.0: {}
+
   postcss@8.4.47:
     dependencies:
       nanoid: 3.3.7
       picocolors: 1.1.1
       source-map-js: 1.2.1
+
+  prismjs@1.29.0: {}
 
   prosemirror-commands@1.6.2:
     dependencies:
@@ -1175,6 +1252,8 @@ snapshots:
   totalist@3.0.1: {}
 
   tslib@2.8.0: {}
+
+  tui-color-picker@2.2.8: {}
 
   typescript@5.6.3: {}
 

@@ -1,4 +1,4 @@
-export const content = [
+const baseContent = [
   '# Heading 1',
   '## Heading 2',
   '### Heading 3',
@@ -24,7 +24,76 @@ export const content = [
   '',
   '[link](https://example.com)',
   '',
+].join('\n');
+const colorContent = [
+  '## Color Syntax Plugin',
+  '',
+  '<span style="color: #ba8baf">Click the color</span><span style="color: #3c4936"> </span><span style="color:#86c1b9">picker </span><span style="color: #4f9f29">button</span><span style="color:#86c1b9"> </span><span style="color: #ab4642">on the</span><span style="color:#86c1b9"> </span><span style="color: #cea464">toolbar</span><span style="color:#86c1b9">!</span>',
+  ''
+].join('\n');
+const tableContent = [
+  '## Table Merged Cell Plugin',
+  '',
   '| @cols=2:merged |',
   '| --- | --- |',
-  '| table | table |',
+  '| table | table2 |',
+  '',
 ].join('\n');
+const codeSyntaxContent = [
+  '## Code Syntax Highlighting Plugin',
+  '',
+  '```javascript',
+  "console.log('foo')",
+  '```',
+  '```html',
+  '<div id="editor"><span>baz</span></div>',
+  '```',
+  '',
+].join('\n');
+// src/routes/dummy_chart.js
+const chartContent = [
+  '## Chart Plugin',
+  '',
+  '$$chart',
+  ',category1,category2',
+  'Jan,21,23',
+  'Feb,31,17',
+  '',
+  'type: column',
+  'title: Monthly Revenue',
+  'x.title: Amount',
+  'y.title: Month',
+  'y.min: 1',
+  'y.max: 40',
+  'y.suffix: $',
+  '$$',
+  '',
+].join('\n');
+const umlContent = [
+  '## UML Plugin',
+  '',
+  '$$uml',
+  'partition Conductor {',
+  '  (*) --> "Climbs on Platform"',
+  '  --> === S1 ===',
+  '  --> Bows',
+  '}',
+  '',
+  'partition Audience #LightSkyBlue {',
+  '  === S1 === --> Applauds',
+  '}',
+  '',
+  'partition Conductor {',
+  '  Bows --> === S2 ===',
+  '  --> WavesArmes',
+  '  Applauds --> === S2 ===',
+  '}',
+  '',
+  'partition Orchestra #CCCCEE {',
+  '  WavesArmes --> Introduction',
+  '  --> "Play music"',
+  '}',
+  '$$',
+  '',
+].join('\n');
+export const content = baseContent + colorContent + tableContent + codeSyntaxContent + chartContent + umlContent;

@@ -31,6 +31,7 @@
   <Editor
     bind:this={editorRef}
     initialValue={content}
+    pluginsOn={['colorSyntax', 'tableMergedCell','codeSyntaxHighlight', 'chart', 'uml']} 
     onload={() => console.log("Editor loaded")}
   />
   <!-- onchange={() => console.log('Editor changed')}
