@@ -37,6 +37,13 @@ Example `+page.svelte`:
 
 {/if}
 </main>
+
+```
+## Invoke functions on the running editor
+You can invoke functions on the running editor by using `getEditor()`
+```js
+    const editorInstance = editorRef.getEditor();
+    editorInstance.exec('addLink', { linkText: 'TOAST UI', linkUrl: 'https://ui.toast.com' });
 ```
 
 ## Plugins

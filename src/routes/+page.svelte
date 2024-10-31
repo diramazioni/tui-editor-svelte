@@ -11,7 +11,8 @@
     const editorInstance = editorRef.getEditor();
     // editorInstance.changePreviewStyle('tab');
     editorInstance.exec('bold');
-    editorInstance.insertText('[example test]("http://example.com")')
+    editorInstance.exec('addLink', { linkText: 'TOAST UI', linkUrl: 'https://ui.toast.com' });
+    //editorInstance.insertText('[example test]("http://example.com")')
   }
 
 </script>

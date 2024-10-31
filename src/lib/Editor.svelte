@@ -25,8 +25,13 @@
     chartOptions?: ChartOptions;
     onload?: (e: any) => void;
     onchange?: (e: any) => void;
+    oncaretChange?: (e: any) => void;
     onfocus?: (e: any) => void;
     onblur?: (e: any) => void;
+    onkeydown?: (e: any) => void;
+    onkeyup?: (e: any) => void;
+    onbeforePreviewRender?: (e: any) => void;
+    onbeforeConvertWysiwygToMarkdown?: (e: any) => void;
   }
   interface ChartOptions {
     width?: number | string;
@@ -44,8 +49,14 @@
     chartOptions = {},
     onload = () => {},
     onchange = () => {},
+    oncaretChange = () => {},
     onfocus = () => {},
     onblur = () => {},
+    onkeydown = () => {},
+    onkeyup = () => {},
+    onbeforePreviewRender = () => {},
+    onbeforeConvertWysiwygToMarkdown = () => {},
+
   }: EditorProps = $props() as EditorProps;
   
   let editor: ToastEditor | null  = $state();
@@ -107,8 +118,13 @@
     editorOptions.events = {
       load: (args: any) => onload(args),
       change: (args: any) => onchange(args),
+      caretChange: (args: any) => oncaretChange(args),
       focus: (args: any) => onfocus(args),
-      blur: (args: any) => onblur(args)
+      blur: (args: any) => onblur(args),
+      keydown: (args: any) => onkeydown(args),
+      keyup: (args: any) => onkeyup(args),
+      beforePreviewRender: (args: any) => onbeforePreviewRender(args),
+      beforeConvertWysiwygToMarkdown: (args: any) => onbeforeConvertWysiwygToMarkdown(args),
     };
     // Inject the editor into the DOM
     editorOptions.el = node;
