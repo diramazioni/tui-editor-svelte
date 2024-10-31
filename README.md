@@ -8,7 +8,7 @@ This libraray is a wrapper for [tui-editor](https://github.com/nhn/tui.editor) f
 
 ## Usage
 Example `+page.svelte`:
-'''svelte
+```svelte
 <script lang="ts" setup>
   import Editor from "$lib/Editor.svelte";
   import Viewer from "$lib/Viewer.svelte";
@@ -71,7 +71,7 @@ Example `+page.svelte`:
     }
   }
 </style>
-'''
+```
 
 ## Developing this library
 
