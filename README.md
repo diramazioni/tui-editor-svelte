@@ -14,21 +14,11 @@ Example `+page.svelte`:
   import Viewer from "$lib/Viewer.svelte";
   import { content } from "./dummy.js";
   
-
   let viewerMode = $state(false);
   let editorRef = $state(); // Reference to store the component instance
-
-  function invokeTest() {
-    const editorInstance = editorRef.getEditor();
-    // editorInstance.changePreviewStyle('tab');
-    editorInstance.exec('bold');
-    editorInstance.insertText('[example test]("http://example.com")')
-  }
-
 </script>
 
 <main>
-
 <h1>Welcome to tui-editor-svelte for Svelte 5!</h1>
 <p>
   <button onclick={() => (viewerMode = !viewerMode)}>
@@ -44,25 +34,9 @@ Example `+page.svelte`:
     initialValue={content}
     onload={() => console.log("Editor loaded")}
   />
-  <!-- onchange={() => console.log('Editor changed')}
-    onfocus={() => console.log('Editor focused')}
-    onblur={() => console.log('Editor blur')} -->
+
 {/if}
-<button onclick={invokeTest}>Invoke Method</button>
 </main>
-
-<style>
-  
-  h1 {
-    margin: 0 auto;
-    text-align: center;
-    color: #ff3e00;
-    text-transform: uppercase;
-    font-size: 4em;
-    font-weight: 100;
-  }
-
-</style>
 ```
 
 ## Developing this library
