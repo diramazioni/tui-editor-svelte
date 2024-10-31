@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script lang="ts">
   import Editor from "$lib/Editor.svelte";
   import Viewer from "$lib/Viewer.svelte";
   import { content } from "./dummy.js";
