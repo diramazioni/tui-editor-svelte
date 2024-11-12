@@ -1,5 +1,5 @@
 {
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"name": "@diramazioni/tui-editor-svelte",
 	"description": "A Svelte wrapper for the TUI Editor",
 	"keywords": [
@@ -42,7 +42,13 @@
 		".": {
 			"types": "./dist/index.d.ts",
 			"svelte": "./dist/index.js"
-		}
+		},
+		"./Editor": {
+			"import": "./dist/Editor.svelte"
+		},
+		"./Viewer": {
+			"import": "./dist/Viewer.svelte"
+		}		
 	},
 	"peerDependencies": {
 		"@toast-ui/editor": "^3.2.2",
