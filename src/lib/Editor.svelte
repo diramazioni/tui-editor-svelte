@@ -113,7 +113,6 @@
     }
     // Merge default options with user options
     const editorOptions = { ...defaultTuiOptions, ...options, plugins, initialValue }; 
-    console.log('editorOptions', editorOptions);
     // Map events to callback props
     editorOptions.events = {
       load: (args: any) => onload(args),
